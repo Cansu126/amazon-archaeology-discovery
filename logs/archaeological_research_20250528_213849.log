@@ -1,0 +1,32 @@
+2025-05-28 21:38:49,354 - __main__ - INFO - Initializing Archaeological Research System...
+2025-05-28 21:38:49,354 - config_loader - INFO - Config loader initialized with path: config.json
+2025-05-28 21:38:49,355 - config_loader - INFO - Configuration loaded successfully
+2025-05-28 21:38:49,356 - __main__ - INFO - Created output directory: data/amazon/results
+2025-05-28 21:38:49,356 - __main__ - INFO - Created output directory: data/amazon/visualizations
+2025-05-28 21:38:49,357 - __main__ - INFO - Created output directory: data/amazon/logs
+2025-05-28 21:38:49,362 - lidar_processing - INFO - Initializing LiDAR Processing...
+2025-05-28 21:38:49,362 - lidar_processing - INFO - LiDAR Processing initialized.
+2025-05-28 21:38:49,363 - satellite_processing - INFO - Satellite processor initialized
+2025-05-28 21:38:49,363 - historical_analysis - INFO - Historical analyzer initialized
+2025-05-28 21:38:49,363 - data_fusion - INFO - Data fusion system initialized
+2025-05-28 21:38:49,364 - validation - INFO - Validation system initialized
+2025-05-28 21:38:49,364 - __main__ - INFO - Archaeological Research System initialized.
+2025-05-28 21:38:49,364 - __main__ - INFO - Processing LIDAR data...
+2025-05-28 21:38:49,365 - lidar_processing - INFO - Processing LIDAR data...
+2025-05-28 21:39:26,577 - lidar_processing - INFO - Found 61766 potential archaeological sites
+2025-05-28 21:39:26,586 - __main__ - INFO - LIDAR data processing complete.
+2025-05-28 21:39:26,586 - __main__ - INFO - LIDAR data processing completed
+2025-05-28 21:39:26,586 - satellite_processing - INFO - Processing satellite image: data/amazon/satellite
+2025-05-28 21:39:26,586 - __main__ - INFO - Satellite data processing completed
+2025-05-28 21:39:26,587 - historical_analysis - INFO - Analyzing historical data from: data/amazon/historical
+2025-05-28 21:39:26,587 - __main__ - INFO - Historical data analysis completed
+2025-05-28 21:39:26,587 - data_fusion - INFO - Fusing data from multiple sources
+2025-05-28 21:39:26,587 - __main__ - INFO - Data fusion completed
+2025-05-28 21:39:26,588 - validation - INFO - Validating archaeological data
+2025-05-28 21:39:26,588 - __main__ - INFO - Validation completed
+2025-05-28 21:39:26,588 - visualization - INFO - Creating visualizations...
+2025-05-28 21:39:26,588 - visualization - ERROR - Error creating elevation profile: 'sites'
+2025-05-28 21:39:26,589 - visualization - ERROR - Error creating site distribution map: 'sites'
+2025-05-28 21:39:26,589 - visualization - ERROR - Error creating feature analysis plots: 'sites'
+2025-05-28 21:39:26,590 - __main__ - INFO - Visualization completed
+2025-05-28 21:39:26,590 - __main__ - INFO - Archaeological research process completed successfully

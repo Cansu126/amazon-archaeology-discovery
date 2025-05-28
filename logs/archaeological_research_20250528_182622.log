@@ -1,0 +1,28 @@
+2025-05-28 18:26:22,036 - __main__ - INFO - Initializing Archaeological Research System...
+2025-05-28 18:26:22,037 - config_loader - INFO - Config loader initialized with path: config.json
+2025-05-28 18:26:22,039 - config_loader - INFO - Configuration loaded successfully
+2025-05-28 18:26:22,041 - __main__ - INFO - Created output directory: data/amazon/results
+2025-05-28 18:26:22,043 - __main__ - INFO - Created output directory: data/amazon/visualizations
+2025-05-28 18:26:22,045 - __main__ - INFO - Created output directory: data/amazon/logs
+2025-05-28 18:26:22,046 - lidar_processing - INFO - Initializing LiDAR Processing...
+2025-05-28 18:26:22,047 - lidar_processing - INFO - LiDAR Processing initialized.
+2025-05-28 18:26:22,048 - satellite_processing - INFO - Satellite processor initialized
+2025-05-28 18:26:22,049 - historical_analysis - INFO - Historical analyzer initialized
+2025-05-28 18:26:22,050 - data_fusion - INFO - Data fusion system initialized
+2025-05-28 18:26:22,051 - validation - INFO - Validation system initialized
+2025-05-28 18:26:22,051 - __main__ - INFO - Archaeological Research System initialized.
+2025-05-28 18:26:22,052 - __main__ - INFO - Processing LIDAR data...
+2025-05-28 18:26:22,053 - lidar_processing - INFO - Processing LIDAR data...
+2025-05-28 18:26:22,054 - __main__ - INFO - LIDAR data processing complete.
+2025-05-28 18:26:22,055 - __main__ - INFO - LIDAR data processing completed
+2025-05-28 18:26:22,056 - satellite_processing - INFO - Processing satellite image: data/amazon/satellite
+2025-05-28 18:26:22,057 - __main__ - INFO - Satellite data processing completed
+2025-05-28 18:26:22,058 - historical_analysis - INFO - Analyzing historical data from: data/amazon/historical
+2025-05-28 18:26:22,059 - __main__ - INFO - Historical data analysis completed
+2025-05-28 18:26:22,061 - data_fusion - INFO - Fusing data from multiple sources
+2025-05-28 18:26:22,062 - __main__ - INFO - Data fusion completed
+2025-05-28 18:26:22,063 - validation - INFO - Validating archaeological data
+2025-05-28 18:26:22,064 - __main__ - INFO - Validation completed
+2025-05-28 18:26:22,065 - visualization - INFO - Creating visualizations...
+2025-05-28 18:26:22,078 - visualization - ERROR - Error creating visualizations: Custom tiles must have an attribution.
+2025-05-28 18:26:22,079 - __main__ - ERROR - Error in archaeological research process: Custom tiles must have an attribution.

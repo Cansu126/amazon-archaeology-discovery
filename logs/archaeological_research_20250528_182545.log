@@ -1,0 +1,13 @@
+2025-05-28 18:25:45,831 - __main__ - INFO - Initializing Archaeological Research System...
+2025-05-28 18:25:45,833 - config_loader - INFO - Config loader initialized with path: config.json
+2025-05-28 18:25:45,834 - config_loader - INFO - Configuration loaded successfully
+2025-05-28 18:25:45,836 - __main__ - INFO - Created output directory: data/amazon/results
+2025-05-28 18:25:45,837 - __main__ - INFO - Created output directory: data/amazon/visualizations
+2025-05-28 18:25:45,838 - __main__ - INFO - Created output directory: data/amazon/logs
+2025-05-28 18:25:45,839 - lidar_processing - INFO - Initializing LiDAR Processing...
+2025-05-28 18:25:45,840 - lidar_processing - INFO - LiDAR Processing initialized.
+2025-05-28 18:25:45,840 - satellite_processing - INFO - Satellite processor initialized
+2025-05-28 18:25:45,841 - historical_analysis - INFO - Historical analyzer initialized
+2025-05-28 18:25:45,842 - data_fusion - INFO - Data fusion system initialized
+2025-05-28 18:25:45,843 - validation - INFO - Validation system initialized
+2025-05-28 18:25:45,844 - __main__ - ERROR - Error in archaeological research process: Visualization.__init__() missing 1 required positional argument: 'config'

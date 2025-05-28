@@ -1,0 +1,33 @@
+2025-05-28 22:01:24,330 - __main__ - INFO - Initializing Archaeological Research System...
+2025-05-28 22:01:24,330 - config_loader - INFO - Config loader initialized with path: config.json
+2025-05-28 22:01:24,331 - config_loader - INFO - Configuration loaded successfully
+2025-05-28 22:01:24,332 - __main__ - INFO - Created output directory: data/amazon/results
+2025-05-28 22:01:24,332 - __main__ - INFO - Created output directory: data/amazon/visualizations
+2025-05-28 22:01:24,333 - __main__ - INFO - Created output directory: data/amazon/logs
+2025-05-28 22:01:24,337 - lidar_processing - INFO - Initializing LiDAR Processing...
+2025-05-28 22:01:24,337 - lidar_processing - INFO - LiDAR Processing initialized.
+2025-05-28 22:01:24,338 - satellite_processing - INFO - Satellite processor initialized
+2025-05-28 22:01:24,338 - historical_analysis - INFO - Historical analyzer initialized
+2025-05-28 22:01:24,338 - data_fusion - INFO - Data fusion system initialized
+2025-05-28 22:01:24,339 - validation - INFO - Validation system initialized
+2025-05-28 22:01:24,340 - __main__ - INFO - Archaeological Research System initialized.
+2025-05-28 22:01:24,340 - __main__ - INFO - Processing LIDAR data...
+2025-05-28 22:01:24,340 - lidar_processing - INFO - Processing LIDAR data...
+2025-05-28 22:02:05,511 - lidar_processing - INFO - Found 61766 potential archaeological sites
+2025-05-28 22:02:05,521 - __main__ - INFO - Found 61766 potential sites from LIDAR data
+2025-05-28 22:02:05,521 - __main__ - INFO - LIDAR data processing completed
+2025-05-28 22:02:05,521 - __main__ - INFO - Processing satellite data...
+2025-05-28 22:02:05,522 - satellite_processing - INFO - Processing satellite image: data\amazon/satellite
+2025-05-28 22:02:05,523 - rasterio._env - INFO - GDAL signalled an error: err_no=4, msg='data\\amazon/satellite: Permission denied'
+2025-05-28 22:02:05,524 - satellite_processing - ERROR - Error processing satellite data: data\amazon/satellite: Permission denied
+2025-05-28 22:02:05,524 - __main__ - INFO - Found 0 potential sites from satellite data
+2025-05-28 22:02:05,524 - __main__ - INFO - Satellite data processing completed
+2025-05-28 22:02:05,525 - __main__ - INFO - Analyzing historical data...
+2025-05-28 22:02:05,525 - historical_analysis - INFO - Analyzing historical data from: data\amazon/historical
+2025-05-28 22:02:05,526 - historical_analysis - INFO - Found 0 potential sites from historical analysis
+2025-05-28 22:02:05,526 - __main__ - INFO - Found 0 potential sites from historical analysis
+2025-05-28 22:02:05,526 - __main__ - INFO - Historical data analysis completed
+2025-05-28 22:02:05,530 - __main__ - INFO - Generating visualizations...
+2025-05-28 22:03:24,024 - rasterio._env - INFO - GDAL signalled an error: err_no=4, msg='data\\amazon/satellite/sentinel2.tif: No such file or directory'
+2025-05-28 22:03:24,041 - __main__ - ERROR - Error generating visualizations: data\amazon/satellite/sentinel2.tif: No such file or directory
+2025-05-28 22:03:28,512 - __main__ - INFO - Archaeological research process completed successfully

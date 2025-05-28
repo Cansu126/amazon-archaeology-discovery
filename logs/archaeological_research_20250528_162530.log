@@ -1,0 +1,31 @@
+2025-05-28 16:25:30,774 - __main__ - INFO - Initializing Archaeological Research System...
+2025-05-28 16:25:30,775 - config_loader - INFO - Config loader initialized with path: config.json
+2025-05-28 16:25:30,777 - config_loader - INFO - Configuration loaded successfully
+2025-05-28 16:25:30,778 - __main__ - INFO - Created output directory: data/amazon/results
+2025-05-28 16:25:30,779 - __main__ - INFO - Created output directory: data/amazon/visualizations
+2025-05-28 16:25:30,779 - __main__ - INFO - Created output directory: data/amazon/logs
+2025-05-28 16:25:30,780 - lidar_processing - INFO - Initializing LiDAR Processing...
+2025-05-28 16:25:30,780 - lidar_processing - INFO - LiDAR Processing initialized.
+2025-05-28 16:25:30,781 - satellite_processing - INFO - Satellite processor initialized
+2025-05-28 16:25:30,781 - historical_analysis - INFO - Historical analyzer initialized
+2025-05-28 16:25:30,783 - data_fusion - INFO - Data fusion system initialized
+2025-05-28 16:25:30,784 - validation - INFO - Validation system initialized
+2025-05-28 16:25:30,784 - visualization - INFO - Visualization system initialized
+2025-05-28 16:25:30,785 - __main__ - INFO - Archaeological Research System initialized.
+2025-05-28 16:25:30,786 - __main__ - INFO - Processing LIDAR data...
+2025-05-28 16:25:30,788 - lidar_processing - INFO - Processing LIDAR data...
+2025-05-28 16:25:30,791 - lidar_processing - INFO - Findings saved to data/amazon/results\lidar_findings_20250528_162530.json
+2025-05-28 16:25:30,793 - lidar_processing - INFO - LIDAR data processing complete.
+2025-05-28 16:25:30,794 - __main__ - INFO - LIDAR data processing complete.
+2025-05-28 16:25:30,795 - __main__ - INFO - LIDAR data processing completed
+2025-05-28 16:25:30,796 - satellite_processing - INFO - Processing satellite image: data/amazon/satellite
+2025-05-28 16:25:30,797 - __main__ - INFO - Satellite data processing completed
+2025-05-28 16:25:30,798 - historical_analysis - INFO - Analyzing historical data from: data/amazon/historical
+2025-05-28 16:25:30,800 - __main__ - INFO - Historical data analysis completed
+2025-05-28 16:25:30,801 - data_fusion - INFO - Fusing data from multiple sources
+2025-05-28 16:25:30,802 - __main__ - INFO - Data fusion completed
+2025-05-28 16:25:30,803 - validation - INFO - Validating archaeological data
+2025-05-28 16:25:30,803 - __main__ - INFO - Validation completed
+2025-05-28 16:25:30,804 - visualization - INFO - Creating visualizations
+2025-05-28 16:25:30,805 - __main__ - INFO - Visualization completed
+2025-05-28 16:25:30,806 - __main__ - INFO - Archaeological research process completed successfully

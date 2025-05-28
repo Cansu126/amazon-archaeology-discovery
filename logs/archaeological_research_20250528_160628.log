@@ -1,0 +1,30 @@
+2025-05-28 16:06:28,919 - __main__ - INFO - Initializing Archaeological Research System...
+2025-05-28 16:06:28,921 - config_loader - INFO - Config loader initialized with path: ../config.json
+2025-05-28 16:06:28,922 - config_loader - ERROR - Error loading configuration: [Errno 2] No such file or directory: '../config.json'
+2025-05-28 16:06:28,922 - __main__ - INFO - Created output directory: results
+2025-05-28 16:06:28,925 - __main__ - INFO - Created output directory: results/visualizations
+2025-05-28 16:06:28,925 - lidar_processing - INFO - Initializing LiDAR Processing...
+2025-05-28 16:06:28,927 - lidar_processing - INFO - LiDAR Processing initialized.
+2025-05-28 16:06:28,927 - satellite_processing - INFO - Satellite processor initialized
+2025-05-28 16:06:28,928 - historical_analysis - INFO - Historical analyzer initialized
+2025-05-28 16:06:28,929 - data_fusion - INFO - Data fusion system initialized
+2025-05-28 16:06:28,929 - validation - INFO - Validation system initialized
+2025-05-28 16:06:28,931 - visualization - INFO - Visualization system initialized
+2025-05-28 16:06:28,931 - __main__ - INFO - Archaeological Research System initialized.
+2025-05-28 16:06:28,931 - __main__ - INFO - Processing LIDAR data...
+2025-05-28 16:06:28,933 - lidar_processing - INFO - Processing 1 LIDAR files: ['data/sample/lidar\\dummy.las']
+2025-05-28 16:06:28,936 - lidar_processing - ERROR - Error processing file data/sample/lidar\dummy.las: Source is empty
+2025-05-28 16:06:28,938 - lidar_processing - INFO - LIDAR data processing complete.
+2025-05-28 16:06:28,940 - __main__ - INFO - LIDAR data processing complete.
+2025-05-28 16:06:28,941 - __main__ - INFO - LIDAR data processing completed
+2025-05-28 16:06:28,942 - satellite_processing - INFO - Processing satellite image: data/sample/satellite
+2025-05-28 16:06:28,942 - __main__ - INFO - Satellite data processing completed
+2025-05-28 16:06:28,945 - historical_analysis - INFO - Analyzing historical data from: data/sample/historical
+2025-05-28 16:06:28,947 - __main__ - INFO - Historical data analysis completed
+2025-05-28 16:06:28,948 - data_fusion - INFO - Fusing data from multiple sources
+2025-05-28 16:06:28,948 - __main__ - INFO - Data fusion completed
+2025-05-28 16:06:28,950 - validation - INFO - Validating archaeological data
+2025-05-28 16:06:28,951 - __main__ - INFO - Validation completed
+2025-05-28 16:06:28,952 - visualization - INFO - Creating visualizations
+2025-05-28 16:06:28,954 - __main__ - INFO - Visualization completed
+2025-05-28 16:06:28,955 - __main__ - INFO - Archaeological research process completed successfully

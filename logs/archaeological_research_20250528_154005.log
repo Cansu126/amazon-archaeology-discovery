@@ -1,0 +1,17 @@
+2025-05-28 15:40:05,225 - __main__ - INFO - Initializing Archaeological Research System...
+2025-05-28 15:40:05,226 - config_loader - INFO - Config loader initialized with path: ../config.json
+2025-05-28 15:40:05,227 - config_loader - ERROR - Error loading configuration: [Errno 2] No such file or directory: '../config.json'
+2025-05-28 15:40:05,229 - __main__ - INFO - Created output directory: results
+2025-05-28 15:40:05,230 - __main__ - INFO - Created output directory: results/visualizations
+2025-05-28 15:40:05,230 - lidar_processing - INFO - Initializing LiDAR Processing...
+2025-05-28 15:40:05,236 - lidar_processing - WARNING - LiDAR input or output path not specified in config.
+2025-05-28 15:40:05,237 - lidar_processing - INFO - LiDAR Processing initialized.
+2025-05-28 15:40:05,238 - satellite_processing - INFO - Satellite processor initialized
+2025-05-28 15:40:05,239 - historical_analysis - INFO - Historical analyzer initialized
+2025-05-28 15:40:05,241 - data_fusion - INFO - Data fusion system initialized
+2025-05-28 15:40:05,242 - validation - INFO - Validation system initialized
+2025-05-28 15:40:05,243 - visualization - INFO - Visualization system initialized
+2025-05-28 15:40:05,245 - __main__ - INFO - Archaeological Research System initialized.
+2025-05-28 15:40:05,246 - __main__ - INFO - Processing LIDAR data...
+2025-05-28 15:40:05,247 - __main__ - ERROR - Error processing LIDAR data: 'LidarProcessing' object has no attribute 'process_lidar_data'
+2025-05-28 15:40:05,249 - __main__ - ERROR - Error in archaeological research process: 'LidarProcessing' object has no attribute 'process_lidar_data'

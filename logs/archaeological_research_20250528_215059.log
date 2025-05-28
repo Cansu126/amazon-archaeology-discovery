@@ -1,0 +1,30 @@
+2025-05-28 21:50:59,680 - __main__ - INFO - Initializing Archaeological Research System...
+2025-05-28 21:50:59,680 - config_loader - INFO - Config loader initialized with path: config.json
+2025-05-28 21:50:59,681 - config_loader - INFO - Configuration loaded successfully
+2025-05-28 21:50:59,682 - __main__ - INFO - Created output directory: data/amazon/results
+2025-05-28 21:50:59,682 - __main__ - INFO - Created output directory: data/amazon/visualizations
+2025-05-28 21:50:59,683 - __main__ - INFO - Created output directory: data/amazon/logs
+2025-05-28 21:50:59,683 - lidar_processing - INFO - Initializing LiDAR Processing...
+2025-05-28 21:50:59,684 - lidar_processing - INFO - LiDAR Processing initialized.
+2025-05-28 21:50:59,684 - satellite_processing - INFO - Satellite processor initialized
+2025-05-28 21:50:59,684 - historical_analysis - INFO - Historical analyzer initialized
+2025-05-28 21:50:59,685 - data_fusion - INFO - Data fusion system initialized
+2025-05-28 21:50:59,685 - validation - INFO - Validation system initialized
+2025-05-28 21:50:59,686 - __main__ - INFO - Archaeological Research System initialized.
+2025-05-28 21:50:59,686 - __main__ - INFO - Processing LIDAR data...
+2025-05-28 21:50:59,686 - lidar_processing - INFO - Processing LIDAR data...
+2025-05-28 21:51:35,776 - lidar_processing - INFO - Found 61766 potential archaeological sites
+2025-05-28 21:51:35,784 - __main__ - INFO - Found 61766 potential sites from LIDAR data
+2025-05-28 21:51:35,784 - __main__ - INFO - LIDAR data processing completed
+2025-05-28 21:51:35,784 - __main__ - INFO - Processing satellite data...
+2025-05-28 21:51:35,785 - satellite_processing - INFO - Processing satellite image: data\amazon/satellite
+2025-05-28 21:51:35,787 - rasterio._env - INFO - GDAL signalled an error: err_no=4, msg='data\\amazon/satellite: Permission denied'
+2025-05-28 21:51:35,787 - satellite_processing - ERROR - Error processing satellite data: data\amazon/satellite: Permission denied
+2025-05-28 21:51:35,787 - __main__ - INFO - Found 0 potential sites from satellite data
+2025-05-28 21:51:35,787 - __main__ - INFO - Satellite data processing completed
+2025-05-28 21:51:35,787 - __main__ - INFO - Analyzing historical data...
+2025-05-28 21:51:35,787 - historical_analysis - INFO - Analyzing historical data from: data\amazon/historical
+2025-05-28 21:51:35,788 - historical_analysis - INFO - Found 0 potential sites from historical analysis
+2025-05-28 21:51:35,788 - __main__ - INFO - Found 0 potential sites from historical analysis
+2025-05-28 21:51:35,790 - __main__ - INFO - Historical data analysis completed
+2025-05-28 21:51:35,792 - __main__ - INFO - Generating visualizations...

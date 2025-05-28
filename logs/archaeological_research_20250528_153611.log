@@ -1,0 +1,17 @@
+2025-05-28 15:36:11,366 - __main__ - INFO - Initializing Archaeological Research System...
+2025-05-28 15:36:11,367 - config_loader - INFO - Config loader initialized with path: ../config.json
+2025-05-28 15:36:11,368 - config_loader - ERROR - Error loading configuration: [Errno 2] No such file or directory: '../config.json'
+2025-05-28 15:36:11,370 - __main__ - INFO - Created output directory: results
+2025-05-28 15:36:11,372 - __main__ - INFO - Created output directory: results/visualizations
+2025-05-28 15:36:11,373 - lidar_processing - INFO - Initializing LiDAR Processing...
+2025-05-28 15:36:11,378 - lidar_processing - WARNING - LiDAR input or output path not specified in config.
+2025-05-28 15:36:11,381 - lidar_processing - INFO - LiDAR Processing initialized.
+2025-05-28 15:36:11,381 - satellite_processing - INFO - Satellite processor initialized
+2025-05-28 15:36:11,384 - historical_analysis - INFO - Historical analyzer initialized
+2025-05-28 15:36:11,384 - data_fusion - INFO - Data fusion system initialized
+2025-05-28 15:36:11,386 - validation - INFO - Validation system initialized
+2025-05-28 15:36:11,389 - visualization - INFO - Visualization system initialized
+2025-05-28 15:36:11,391 - __main__ - INFO - Archaeological Research System initialized.
+2025-05-28 15:36:11,392 - __main__ - INFO - Processing LIDAR data...
+2025-05-28 15:36:11,394 - __main__ - ERROR - Error processing LIDAR data: [WinError 3] Sistem belirtilen yolu bulamýyor: 'data/sample/lidar'
+2025-05-28 15:36:11,396 - __main__ - ERROR - Error in archaeological research process: [WinError 3] Sistem belirtilen yolu bulamýyor: 'data/sample/lidar'

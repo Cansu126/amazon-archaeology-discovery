@@ -1,0 +1,30 @@
+2025-05-28 18:54:34,913 - __main__ - INFO - Initializing Archaeological Research System...
+2025-05-28 18:54:34,914 - config_loader - INFO - Config loader initialized with path: config.json
+2025-05-28 18:54:34,914 - config_loader - INFO - Configuration loaded successfully
+2025-05-28 18:54:34,914 - __main__ - INFO - Created output directory: data/amazon/results
+2025-05-28 18:54:34,915 - __main__ - INFO - Created output directory: data/amazon/visualizations
+2025-05-28 18:54:34,916 - __main__ - INFO - Created output directory: data/amazon/logs
+2025-05-28 18:54:34,916 - lidar_processing - INFO - Initializing LiDAR Processing...
+2025-05-28 18:54:34,916 - lidar_processing - INFO - LiDAR Processing initialized.
+2025-05-28 18:54:34,916 - satellite_processing - INFO - Satellite processor initialized
+2025-05-28 18:54:34,916 - historical_analysis - INFO - Historical analyzer initialized
+2025-05-28 18:54:34,916 - data_fusion - INFO - Data fusion system initialized
+2025-05-28 18:54:34,916 - validation - INFO - Validation system initialized
+2025-05-28 18:54:34,916 - __main__ - INFO - Archaeological Research System initialized.
+2025-05-28 18:54:34,917 - __main__ - INFO - Processing LIDAR data...
+2025-05-28 18:54:34,917 - lidar_processing - INFO - Processing LIDAR data...
+2025-05-28 18:54:34,928 - rasterio._env - INFO - GDAL signalled an error: err_no=4, msg="`data/amazon/lidar\\dummy.las' not recognized as being in a supported file format."
+2025-05-28 18:54:34,929 - lidar_processing - ERROR - Error processing LIDAR file data/amazon/lidar\dummy.las: 'data/amazon/lidar\dummy.las' not recognized as being in a supported file format.
+2025-05-28 18:54:34,930 - __main__ - INFO - LIDAR data processing complete.
+2025-05-28 18:54:34,931 - __main__ - INFO - LIDAR data processing completed
+2025-05-28 18:54:34,931 - satellite_processing - INFO - Processing satellite image: data/amazon/satellite
+2025-05-28 18:54:34,931 - __main__ - INFO - Satellite data processing completed
+2025-05-28 18:54:34,932 - historical_analysis - INFO - Analyzing historical data from: data/amazon/historical
+2025-05-28 18:54:34,932 - __main__ - INFO - Historical data analysis completed
+2025-05-28 18:54:34,932 - data_fusion - INFO - Fusing data from multiple sources
+2025-05-28 18:54:34,932 - __main__ - INFO - Data fusion completed
+2025-05-28 18:54:34,933 - validation - INFO - Validating archaeological data
+2025-05-28 18:54:34,933 - __main__ - INFO - Validation completed
+2025-05-28 18:54:34,933 - visualization - INFO - Creating visualizations...
+2025-05-28 18:54:35,890 - visualization - ERROR - Error creating visualizations: 'sites'
+2025-05-28 18:54:35,891 - __main__ - ERROR - Error in archaeological research process: 'sites'

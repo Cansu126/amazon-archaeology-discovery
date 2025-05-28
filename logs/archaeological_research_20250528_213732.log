@@ -1,0 +1,34 @@
+2025-05-28 21:37:32,978 - __main__ - INFO - Initializing Archaeological Research System...
+2025-05-28 21:37:32,978 - config_loader - INFO - Config loader initialized with path: config.json
+2025-05-28 21:37:32,979 - config_loader - INFO - Configuration loaded successfully
+2025-05-28 21:37:32,979 - __main__ - INFO - Created output directory: data/amazon/results
+2025-05-28 21:37:32,979 - __main__ - INFO - Created output directory: data/amazon/visualizations
+2025-05-28 21:37:32,980 - __main__ - INFO - Created output directory: data/amazon/logs
+2025-05-28 21:37:32,980 - lidar_processing - INFO - Initializing LiDAR Processing...
+2025-05-28 21:37:32,981 - lidar_processing - INFO - LiDAR Processing initialized.
+2025-05-28 21:37:32,981 - satellite_processing - INFO - Satellite processor initialized
+2025-05-28 21:37:32,981 - historical_analysis - INFO - Historical analyzer initialized
+2025-05-28 21:37:32,981 - data_fusion - INFO - Data fusion system initialized
+2025-05-28 21:37:32,981 - validation - INFO - Validation system initialized
+2025-05-28 21:37:32,982 - __main__ - INFO - Archaeological Research System initialized.
+2025-05-28 21:37:32,982 - __main__ - INFO - Processing LIDAR data...
+2025-05-28 21:37:32,983 - lidar_processing - INFO - Processing LIDAR data...
+2025-05-28 21:38:09,331 - rasterio._env - INFO - GDAL signalled an error: err_no=4, msg="`data/amazon/lidar\\xingu_lidar_20250528_191738.tif' not recognized as being in a supported file format."
+2025-05-28 21:38:09,331 - lidar_processing - ERROR - Error processing LIDAR file data/amazon/lidar\xingu_lidar_20250528_191738.tif: 'data/amazon/lidar\xingu_lidar_20250528_191738.tif' not recognized as being in a supported file format.
+2025-05-28 21:38:09,332 - lidar_processing - INFO - Found 61766 potential archaeological sites
+2025-05-28 21:38:09,343 - __main__ - INFO - LIDAR data processing complete.
+2025-05-28 21:38:09,343 - __main__ - INFO - LIDAR data processing completed
+2025-05-28 21:38:09,343 - satellite_processing - INFO - Processing satellite image: data/amazon/satellite
+2025-05-28 21:38:09,343 - __main__ - INFO - Satellite data processing completed
+2025-05-28 21:38:09,344 - historical_analysis - INFO - Analyzing historical data from: data/amazon/historical
+2025-05-28 21:38:09,344 - __main__ - INFO - Historical data analysis completed
+2025-05-28 21:38:09,344 - data_fusion - INFO - Fusing data from multiple sources
+2025-05-28 21:38:09,345 - __main__ - INFO - Data fusion completed
+2025-05-28 21:38:09,345 - validation - INFO - Validating archaeological data
+2025-05-28 21:38:09,345 - __main__ - INFO - Validation completed
+2025-05-28 21:38:09,346 - visualization - INFO - Creating visualizations...
+2025-05-28 21:38:09,346 - visualization - ERROR - Error creating elevation profile: 'sites'
+2025-05-28 21:38:09,346 - visualization - ERROR - Error creating site distribution map: 'sites'
+2025-05-28 21:38:09,346 - visualization - ERROR - Error creating feature analysis plots: 'sites'
+2025-05-28 21:38:09,347 - __main__ - INFO - Visualization completed
+2025-05-28 21:38:09,347 - __main__ - INFO - Archaeological research process completed successfully

@@ -1,0 +1,44 @@
+validation:
+  confidence_thresholds:
+    boundary: 0.7
+    artifact: 0.8
+    stratigraphy: 0.75
+    dating: 0.85
+    overall: 0.75
+
+  boundary_validation:
+    lidar_weight: 0.6
+    satellite_weight: 0.4
+
+  artifact_validation:
+    required_fields:
+      - id
+      - type
+      - location
+      - date
+      - description
+
+  stratigraphy_validation:
+    min_layers: 1
+    max_layers: 10
+
+  dating_validation:
+    allowed_methods:
+      - radiocarbon
+      - thermoluminescence
+      - dendrochronology
+      - potassium-argon
+
+  visualization:
+    dpi: 300
+    figure_size: [12, 8]
+
+  logging:
+    level: INFO
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    file: "logs/validation.log"
+    max_file_size: 10485760  # 10MB
+
+  error_handling:
+    max_retries: 3
+    retry_delay: 1.0 

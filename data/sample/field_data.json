@@ -1,0 +1,31 @@
+{
+    "site_info": {
+        "name": "Sample Archaeological Site",
+        "location": {
+            "latitude": 45.5231,
+            "longitude": -122.6765,
+            "elevation": 100.0
+        },
+        "date": "2023-01-15"
+    },
+    "measurements": {
+        "area": 10000.0,
+        "perimeter": 400.0,
+        "max_depth": 3.0
+    },
+    "environmental_data": {
+        "temperature": 20.5,
+        "humidity": 65.0,
+        "soil_ph": 6.8
+    },
+    "notes": [
+        {
+            "timestamp": "2023-01-15T10:00:00",
+            "content": "Initial site survey completed"
+        },
+        {
+            "timestamp": "2023-01-15T14:30:00",
+            "content": "Artifact ART001 discovered"
+        }
+    ]
+} 

@@ -1,0 +1,57 @@
+{
+    "data_dir": "data",
+    "output_dir": "data/amazon",
+    "region": {
+        "name": "Xingu River Basin",
+        "coordinates": {
+            "min_lat": -13.0,
+            "max_lat": -12.0,
+            "min_lon": -54.0,
+            "max_lon": -53.0
+        }
+    },
+    "data_paths": {
+        "lidar": "data/amazon/lidar",
+        "satellite": "data/amazon/satellite",
+        "historical": "data/amazon/historical"
+    },
+    "output_directories": {
+        "results": "data/amazon/results",
+        "visualizations": "data/amazon/visualizations",
+        "logs": "data/amazon/logs"
+    },
+    "processing": {
+        "lidar": {
+            "min_distance": 10,
+            "threshold_abs": 5
+        },
+        "satellite": {
+            "ndvi_threshold": 0.3,
+            "pattern_confidence": 0.6
+        },
+        "historical": {
+            "confidence_threshold": 0.7,
+            "time_period": "pre-colonial"
+        }
+    },
+    "visualization": {
+        "map_center": [-12.5, -53.5],
+        "zoom_level": 8,
+        "confidence_colors": {
+            "high": "red",
+            "medium": "orange",
+            "low": "yellow"
+        }
+    },
+    "api_credentials": {
+        "sentinel_hub": {
+            "username": "your_username",
+            "password": "your_password"
+        },
+        "earth_explorer": {
+            "username": "your_username",
+            "password": "your_password"
+        }
+    },
+    "openai_api_key": "your-api-key-here"
+} 

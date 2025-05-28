@@ -1,0 +1,56 @@
+{
+    "site_boundaries": {
+        "coordinates": [
+            [0.0, 0.0],
+            [0.0, 100.0],
+            [100.0, 100.0],
+            [100.0, 0.0],
+            [0.0, 0.0]
+        ]
+    },
+    "artifacts": [
+        {
+            "id": "ART001",
+            "type": "pottery",
+            "location": [25.5, 45.2, 1.2],
+            "date": "2023-01-15",
+            "description": "Ancient pottery fragment"
+        },
+        {
+            "id": "ART002",
+            "type": "tool",
+            "location": [75.3, 30.1, 0.8],
+            "date": "2023-01-16",
+            "description": "Stone tool"
+        }
+    ],
+    "stratigraphy": {
+        "layers": [
+            {
+                "depth": 0.0,
+                "composition": "soil",
+                "description": "Top soil layer"
+            },
+            {
+                "depth": 1.5,
+                "composition": "clay",
+                "description": "Clay layer"
+            },
+            {
+                "depth": 3.0,
+                "composition": "rock",
+                "description": "Bedrock"
+            }
+        ]
+    },
+    "dating": {
+        "methods": [
+            "radiocarbon",
+            "thermoluminescence"
+        ],
+        "results": {
+            "radiocarbon": "2023-01-15",
+            "thermoluminescence": "2023-01-16"
+        }
+    }
+} 
