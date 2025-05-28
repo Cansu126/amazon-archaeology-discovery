@@ -1,0 +1,62 @@
+{
+    "sites": [
+        {
+            "type": "potential_archaeological_site",
+            "coordinates": {
+                "x": -53.5,
+                "y": -12.5,
+                "elevation": 150.0
+            },
+            "confidence": 0.85,
+            "features": {
+                "elevation": 150.0,
+                "slope": 0.2,
+                "aspect": 1.5
+            },
+            "verification_method": "lidar",
+            "area": 1000
+        },
+        {
+            "type": "potential_archaeological_site",
+            "coordinates": {
+                "x": -53.6,
+                "y": -12.6,
+                "elevation": 180.0
+            },
+            "confidence": 0.75,
+            "features": {
+                "elevation": 180.0,
+                "slope": 0.15,
+                "aspect": 2.0
+            },
+            "verification_method": "satellite_pattern_recognition",
+            "area": 1200
+        },
+        {
+            "type": "potential_archaeological_site",
+            "coordinates": {
+                "x": -53.7,
+                "y": -12.7,
+                "elevation": 200.0
+            },
+            "confidence": 0.95,
+            "features": {
+                "elevation": 200.0,
+                "slope": 0.1,
+                "aspect": 1.8
+            },
+            "verification_method": "both",
+            "area": 1500
+        }
+    ],
+    "metadata": {
+        "source": "SRTM",
+        "region": "Amazon",
+        "coordinates": {
+            "min_lat": -13.5,
+            "max_lat": -12.5,
+            "min_lon": -54.5,
+            "max_lon": -53.5
+        }
+    }
+} 

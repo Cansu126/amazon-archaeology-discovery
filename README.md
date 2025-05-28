@@ -1,5 +1,21 @@
 # AI-Powered Archaeological Discovery in the Amazon
 
+## 🖼️ Media Gallery (Key Visualizations)
+
+| Confidence Distribution | Verification Comparison | Elevation Profile |
+|:----------------------:|:----------------------:|:----------------:|
+| ![Confidence Distribution](data/amazon/visualizations/confidence_distribution.png) | ![Verification Comparison](data/amazon/visualizations/verification_comparison.png) | ![Elevation Profile](data/amazon/visualizations/elevation_profile.png) |
+
+| Site Distribution | Feature Analysis | 3D Visualization |
+|:----------------:|:---------------:|:----------------:|
+| ![Site Distribution](data/amazon/visualizations/site_distribution.png) | ![Feature Analysis](data/amazon/visualizations/feature_analysis.png) | ![3D Plot](data/amazon/visualizations/plot_3d_20250528_232819.png) |
+
+| Summary Plot | Interactive Map |
+|:------------:|:---------------:|
+| ![Summary](data/amazon/visualizations/summary_20250528_232821.png) | [Interactive Site Map (HTML)](data/amazon/visualizations/site_map.html) |
+
+---
+
 ## Overview
 This project presents a novel approach to archaeological site discovery in the Amazon rainforest, combining LIDAR data analysis, satellite imagery processing, and AI-powered historical text interpretation. Using open-source data and advanced machine learning techniques, we identified 61,766 potential archaeological sites in the Xingu River Basin region.
 

@@ -260,7 +260,7 @@ class Visualization:
         # Add findings as markers
         for site in findings.get('sites', []):
             folium.Marker(
-                location=[site['coordinates']['latitude'], site['coordinates']['longitude']],
+                location=[site['coordinates']['y'], site['coordinates']['x']],
                 popup=f"Confidence: {site['confidence']:.2f}",
                 icon=folium.Icon(color='red', icon='info-sign')
             ).add_to(m)
@@ -276,7 +276,7 @@ class Visualization:
         plt.figure(figsize=(12, 6))
         
         # Plot elevation profile
-        elevations = [site['elevation'] for site in findings['sites']]
+        elevations = [site['coordinates']['elevation'] for site in findings['sites']]
         confidences = [site['confidence'] for site in findings['sites']]
         
         plt.scatter(range(len(elevations)), elevations, c=confidences, cmap='viridis')
@@ -300,9 +300,9 @@ class Visualization:
         # Plot each site
         for site in findings.get('sites', []):
             ax.scatter(
-                site['coordinates']['longitude'],
-                site['coordinates']['latitude'],
-                site['elevation'],
+                site['coordinates']['x'],
+                site['coordinates']['y'],
+                site['coordinates']['elevation'],
                 c='r',
                 marker='^'
             )
@@ -331,7 +331,7 @@ class Visualization:
         ax1.set_title('Distribution of Site Confidence Scores')
         
         # Plot elevation vs area
-        elevations = [site['elevation'] for site in findings.get('sites', [])]
+        elevations = [site['coordinates']['elevation'] for site in findings.get('sites', [])]
         areas = [site['area'] for site in findings.get('sites', [])]
         ax2.scatter(areas, elevations, c=confidences, cmap='viridis')
         ax2.set_xlabel('Area (m²)')
