@@ -29,8 +29,8 @@ This project presents a novel approach to archaeological site discovery in the A
 ## Installation
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/amazon-archaeology.git
-cd amazon-archaeology
+git clone https://github.com/Cansu126/amazon-archaeology-discovery.git
+cd amazon-archaeology-discovery
 ```
 
 2. Create and activate virtual environment:
@@ -62,7 +62,7 @@ python scripts/main.py
 
 ## Project Structure
 ```
-amazon-archaeology/
+amazon-archaeology-discovery/
 ├── scripts/
 │   ├── main.py                 # Main execution script
 │   ├── lidar_processing.py     # LIDAR data analysis
