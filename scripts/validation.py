@@ -11,4 +11,11 @@ class ValidationSystem:
     def validate_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Validate archaeological data."""
         logger.info("Validating archaeological data")
-        return {"status": "validated", "valid": True} 
+        return {"status": "validated", "valid": True, "sites": data.get("sites", [])}
+
+def validate_sites(sites: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Validate archaeological sites using the ValidationSystem.
+    """
+    validator = ValidationSystem()
+    return validator.validate_data(sites) 

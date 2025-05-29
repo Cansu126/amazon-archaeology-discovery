@@ -1,52 +1,121 @@
 {
     "sites": [
         {
-            "type": "potential_archaeological_site",
-            "coordinates": {
-                "x": -53.5,
-                "y": -12.5,
-                "elevation": 150.0
-            },
+            "type": "settlement",
+            "coordinates": { "x": -53.5, "y": -12.5, "elevation": 100 },
             "confidence": 0.85,
-            "features": {
-                "elevation": 150.0,
-                "slope": 0.2,
-                "aspect": 1.5
+            "features": { "elevation": 100, "slope": 0.1, "aspect": 1.5 },
+            "area": 1200,
+            "verification_scores": {
+                "lidar": 0.9,
+                "satellite": 0.8,
+                "historical": 0.75,
+                "indigenous": 0.85,
+                "temporal": 0.8
             },
-            "verification_method": "lidar",
-            "area": 1000
+            "temporal_indicators": {
+                "estimated_age": 1200,
+                "period": "Pre-Columbian",
+                "development_phase": "Early"
+            },
+            "indigenous_knowledge": {
+                "sources": ["Local Elder Testimony", "Oral History", "Traditional Maps"],
+                "types": ["Settlement Location", "Cultural Significance", "Historical Events"],
+                "timeline": {
+                    "dates": [1000, 1100, 1200, 1300],
+                    "events": ["Initial Settlement", "Expansion", "Peak", "Decline"]
+                }
+            },
+            "known_site_comparison": {
+                "features": {
+                    "mound_height": 0.85,
+                    "ceramic_density": 0.75,
+                    "settlement_pattern": 0.9,
+                    "water_access": 0.95
+                },
+                "overall_similarity": 0.85,
+                "known_site_type": "Kuhikugu"
+            },
+            "lidar_evidence": [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+            "satellite_evidence": [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
         },
         {
             "type": "potential_archaeological_site",
-            "coordinates": {
-                "x": -53.6,
-                "y": -12.6,
-                "elevation": 180.0
-            },
+            "coordinates": { "x": -53.6, "y": -12.6, "elevation": 180 },
             "confidence": 0.75,
-            "features": {
-                "elevation": 180.0,
-                "slope": 0.15,
-                "aspect": 2.0
+            "features": { "elevation": 180, "slope": 0.15, "aspect": 2.0 },
+            "area": 1400,
+            "verification_scores": {
+                "lidar": 0.7,
+                "satellite": 0.85,
+                "historical": 0.7,
+                "indigenous": 0.7,
+                "temporal": 0.75
             },
-            "verification_method": "satellite_pattern_recognition",
-            "area": 1200
+            "temporal_indicators": {
+                "estimated_age": 900,
+                "period": "Late Pre-Columbian",
+                "development_phase": "Expansion"
+            },
+            "indigenous_knowledge": {
+                "sources": ["Oral History", "Archaeological Survey"],
+                "types": ["Settlement Location", "Historical Events"],
+                "timeline": {
+                    "dates": [900, 1000, 1100],
+                    "events": ["Founding", "Growth", "Abandonment"]
+                }
+            },
+            "known_site_comparison": {
+                "features": {
+                    "mound_height": 0.7,
+                    "ceramic_density": 0.8,
+                    "settlement_pattern": 0.85,
+                    "water_access": 0.9
+                },
+                "overall_similarity": 0.8,
+                "known_site_type": "Santarem"
+            },
+            "lidar_evidence": [[2, 3, 4], [5, 6, 7], [8, 9, 10]],
+            "satellite_evidence": [[2, 3, 4], [5, 6, 7], [8, 9, 10]]
         },
         {
             "type": "potential_archaeological_site",
-            "coordinates": {
-                "x": -53.7,
-                "y": -12.7,
-                "elevation": 200.0
-            },
+            "coordinates": { "x": -53.7, "y": -12.7, "elevation": 200 },
             "confidence": 0.95,
-            "features": {
-                "elevation": 200.0,
-                "slope": 0.1,
-                "aspect": 1.8
+            "features": { "elevation": 200, "slope": 0.12, "aspect": 1.8 },
+            "area": 1600,
+            "verification_scores": {
+                "lidar": 0.95,
+                "satellite": 0.9,
+                "historical": 0.85,
+                "indigenous": 0.9,
+                "temporal": 0.9
             },
-            "verification_method": "both",
-            "area": 1500
+            "temporal_indicators": {
+                "estimated_age": 1500,
+                "period": "Early Pre-Columbian",
+                "development_phase": "Initial"
+            },
+            "indigenous_knowledge": {
+                "sources": ["Traditional Maps", "Oral History"],
+                "types": ["Settlement Location", "Cultural Significance"],
+                "timeline": {
+                    "dates": [1200, 1300, 1400],
+                    "events": ["Settlement", "Expansion", "Decline"]
+                }
+            },
+            "known_site_comparison": {
+                "features": {
+                    "mound_height": 0.9,
+                    "ceramic_density": 0.8,
+                    "settlement_pattern": 0.95,
+                    "water_access": 0.98
+                },
+                "overall_similarity": 0.9,
+                "known_site_type": "Kuhikugu"
+            },
+            "lidar_evidence": [[3, 4, 5], [6, 7, 8], [9, 10, 11]],
+            "satellite_evidence": [[3, 4, 5], [6, 7, 8], [9, 10, 11]]
         }
     ],
     "metadata": {
@@ -58,5 +127,12 @@
             "min_lon": -54.5,
             "max_lon": -53.5
         }
+    },
+    "temporal_development": {
+        "dates": [900, 1000, 1100, 1200, 1300, 1400, 1500],
+        "sites": [2, 5, 10, 15, 20, 18, 12]
+    },
+    "period_overlap": {
+        "matrix": [[1, 0.5, 0.2], [0.5, 1, 0.3], [0.2, 0.3, 1]]
     }
 } 

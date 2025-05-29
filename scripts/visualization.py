@@ -345,4 +345,444 @@ class Visualization:
         plt.savefig(summary_file)
         plt.close()
         
-        return summary_file 
+        return summary_file
+
+    def _create_temporal_analysis(self, findings: Dict[str, Any]) -> str:
+        """Create temporal analysis visualization showing potential age distribution of sites."""
+        try:
+            # Extract temporal indicators
+            temporal_data = []
+            for site in findings['sites']:
+                if 'temporal_indicators' in site:
+                    temporal_data.append({
+                        'age_estimate': site['temporal_indicators'].get('estimated_age', 0),
+                        'confidence': site['confidence'],
+                        'location': [site['coordinates']['x'], site['coordinates']['y']]
+                    })
+            
+            # Create figure
+            fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
+            
+            # Age distribution plot
+            ages = [d['age_estimate'] for d in temporal_data]
+            ax1.hist(ages, bins=20, alpha=0.7)
+            ax1.set_title('Estimated Age Distribution of Sites')
+            ax1.set_xlabel('Estimated Age (years)')
+            ax1.set_ylabel('Number of Sites')
+            
+            # Age vs Confidence scatter
+            ax2.scatter(ages, [d['confidence'] for d in temporal_data], alpha=0.6)
+            ax2.set_title('Age Estimate vs Confidence')
+            ax2.set_xlabel('Estimated Age (years)')
+            ax2.set_ylabel('Confidence Score')
+            
+            plt.tight_layout()
+            
+            # Save plot
+            output_file = os.path.join(self.output_dir, 'temporal_analysis.png')
+            plt.savefig(output_file)
+            plt.close()
+            
+            return output_file
+        except Exception as e:
+            self.logger.error(f"Error creating temporal analysis: {str(e)}")
+            return ""
+
+    def _create_detailed_confidence_analysis(self, findings: Dict[str, Any]) -> str:
+        """Create detailed confidence analysis visualization."""
+        try:
+            # Extract confidence data
+            confidence_data = []
+            for site in findings['sites']:
+                confidence_data.append({
+                    'overall': site['confidence'],
+                    'lidar': site.get('verification_scores', {}).get('lidar', 0),
+                    'satellite': site.get('verification_scores', {}).get('satellite', 0),
+                    'historical': site.get('verification_scores', {}).get('historical', 0)
+                })
+            
+            # Create figure
+            fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 12))
+            
+            # Overall confidence distribution
+            ax1.hist([d['overall'] for d in confidence_data], bins=20, alpha=0.7)
+            ax1.set_title('Overall Confidence Distribution')
+            ax1.set_xlabel('Confidence Score')
+            ax1.set_ylabel('Number of Sites')
+            
+            # Method-specific confidence distributions
+            ax2.hist([d['lidar'] for d in confidence_data], bins=20, alpha=0.7, label='LIDAR')
+            ax2.hist([d['satellite'] for d in confidence_data], bins=20, alpha=0.7, label='Satellite')
+            ax2.set_title('Method-Specific Confidence Distribution')
+            ax2.set_xlabel('Confidence Score')
+            ax2.set_ylabel('Number of Sites')
+            ax2.legend()
+            
+            # Confidence correlation
+            ax3.scatter([d['lidar'] for d in confidence_data], 
+                       [d['satellite'] for d in confidence_data], 
+                       alpha=0.6)
+            ax3.set_title('LIDAR vs Satellite Confidence Correlation')
+            ax3.set_xlabel('LIDAR Confidence')
+            ax3.set_ylabel('Satellite Confidence')
+            
+            # Confidence heatmap
+            confidence_matrix = np.array([[d['lidar'], d['satellite'], d['historical']] 
+                                        for d in confidence_data])
+            im = ax4.imshow(confidence_matrix.mean(axis=0).reshape(1, -1), 
+                          cmap='viridis', aspect='auto')
+            ax4.set_title('Average Confidence by Method')
+            ax4.set_xticks([0, 1, 2])
+            ax4.set_xticklabels(['LIDAR', 'Satellite', 'Historical'])
+            plt.colorbar(im, ax=ax4)
+            
+            plt.tight_layout()
+            
+            # Save plot
+            output_file = os.path.join(self.output_dir, 'detailed_confidence_analysis.png')
+            plt.savefig(output_file)
+            plt.close()
+            
+            return output_file
+        except Exception as e:
+            self.logger.error(f"Error creating detailed confidence analysis: {str(e)}")
+            return ""
+
+    def _create_discovery_case_studies(self, findings: Dict[str, Any]) -> str:
+        """Create detailed case study visualizations for 2-3 significant discoveries."""
+        try:
+            # Select top 3 discoveries by confidence
+            top_sites = sorted(findings['sites'], 
+                             key=lambda x: x['confidence'], 
+                             reverse=True)[:3]
+            
+            # Create figure for each case study
+            for i, site in enumerate(top_sites):
+                fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 12))
+                
+                # LIDAR evidence
+                if 'lidar_evidence' in site:
+                    ax1.imshow(site['lidar_evidence'], cmap='terrain')
+                    ax1.set_title('LIDAR Evidence')
+                    ax1.axis('off')
+                
+                # Satellite evidence
+                if 'satellite_evidence' in site:
+                    ax2.imshow(site['satellite_evidence'])
+                    ax2.set_title('Satellite Evidence')
+                    ax2.axis('off')
+                
+                # Feature analysis
+                if 'features' in site:
+                    features = site['features']
+                    ax3.bar(features.keys(), features.values())
+                    ax3.set_title('Site Features')
+                    ax3.tick_params(axis='x', rotation=45)
+                
+                # Confidence breakdown
+                if 'verification_scores' in site:
+                    scores = site['verification_scores']
+                    ax4.bar(scores.keys(), scores.values())
+                    ax4.set_title('Verification Scores')
+                    ax4.tick_params(axis='x', rotation=45)
+                
+                plt.tight_layout()
+                
+                # Save plot
+                output_file = os.path.join(self.output_dir, f'case_study_{i+1}.png')
+                plt.savefig(output_file)
+                plt.close()
+            
+            return "Case studies generated successfully"
+        except Exception as e:
+            self.logger.error(f"Error creating discovery case studies: {str(e)}")
+            return ""
+
+    def _create_detailed_confidence_intervals(self, findings: Dict[str, Any]) -> str:
+        """Create detailed confidence interval analysis with statistical validation."""
+        try:
+            # Extract confidence data with method-specific scores
+            confidence_data = []
+            for site in findings['sites']:
+                confidence_data.append({
+                    'overall': site['confidence'],
+                    'lidar': site.get('verification_scores', {}).get('lidar', 0),
+                    'satellite': site.get('verification_scores', {}).get('satellite', 0),
+                    'historical': site.get('verification_scores', {}).get('historical', 0),
+                    'indigenous': site.get('verification_scores', {}).get('indigenous', 0),
+                    'temporal': site.get('verification_scores', {}).get('temporal', 0)
+                })
+            
+            # Create figure
+            fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 12))
+            
+            # Confidence intervals by method
+            methods = ['LIDAR', 'Satellite', 'Historical', 'Indigenous', 'Temporal']
+            data = np.array([[d['lidar'], d['satellite'], d['historical'], 
+                            d['indigenous'], d['temporal']] for d in confidence_data])
+            
+            # Calculate confidence intervals (95%)
+            means = np.mean(data, axis=0)
+            stds = np.std(data, axis=0)
+            ci = 1.96 * stds / np.sqrt(len(data))
+            
+            # Plot confidence intervals
+            ax1.errorbar(methods, means, yerr=ci, fmt='o', capsize=5)
+            ax1.set_title('95% Confidence Intervals by Method')
+            ax1.set_ylabel('Confidence Score')
+            ax1.grid(True, alpha=0.3)
+            
+            # Method correlation matrix
+            corr_matrix = np.corrcoef(data.T)
+            im = ax2.imshow(corr_matrix, cmap='coolwarm')
+            ax2.set_xticks(range(len(methods)))
+            ax2.set_yticks(range(len(methods)))
+            ax2.set_xticklabels(methods, rotation=45)
+            ax2.set_yticklabels(methods)
+            plt.colorbar(im, ax=ax2)
+            ax2.set_title('Method Correlation Matrix')
+            
+            # Confidence distribution by site type
+            site_types = set(site.get('type', 'Unknown') for site in findings['sites'])
+            type_confidences = {t: [] for t in site_types}
+            
+            for site in findings['sites']:
+                site_type = site.get('type', 'Unknown')
+                type_confidences[site_type].append(site['confidence'])
+            
+            # Box plot of confidence by site type
+            ax3.boxplot([type_confidences[t] for t in site_types], 
+                       labels=list(site_types))
+            ax3.set_title('Confidence Distribution by Site Type')
+            ax3.set_ylabel('Confidence Score')
+            ax3.tick_params(axis='x', rotation=45)
+            
+            # Statistical summary
+            stats_text = f"""
+            Statistical Summary:
+            Total Sites: {len(findings['sites'])}
+            Mean Confidence: {np.mean([d['overall'] for d in confidence_data]):.3f}
+            Std Dev: {np.std([d['overall'] for d in confidence_data]):.3f}
+            Min Confidence: {min([d['overall'] for d in confidence_data]):.3f}
+            Max Confidence: {max([d['overall'] for d in confidence_data]):.3f}
+            """
+            ax4.text(0.1, 0.5, stats_text, fontsize=10)
+            ax4.axis('off')
+            
+            plt.tight_layout()
+            
+            # Save plot
+            output_file = os.path.join(self.output_dir, 'detailed_confidence_intervals.png')
+            plt.savefig(output_file)
+            plt.close()
+            
+            return output_file
+        except Exception as e:
+            self.logger.error(f"Error creating detailed confidence intervals: {str(e)}")
+            return ""
+
+    def _create_indigenous_knowledge_visualization(self, findings: Dict[str, Any]) -> str:
+        """Create visualization integrating indigenous knowledge and traditional data."""
+        try:
+            # Extract indigenous knowledge data
+            indigenous_data = []
+            for site in findings['sites']:
+                if 'indigenous_knowledge' in site:
+                    indigenous_data.append({
+                        'site': site,
+                        'knowledge': site['indigenous_knowledge'],
+                        'confidence': site['confidence']
+                    })
+            
+            # Create figure
+            fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 12))
+            
+            # Indigenous knowledge sources
+            sources = {}
+            for data in indigenous_data:
+                for source in data['knowledge'].get('sources', []):
+                    sources[source] = sources.get(source, 0) + 1
+            
+            # Plot knowledge sources
+            ax1.bar(sources.keys(), sources.values())
+            ax1.set_title('Indigenous Knowledge Sources')
+            ax1.tick_params(axis='x', rotation=45)
+            
+            # Knowledge type distribution
+            knowledge_types = {}
+            for data in indigenous_data:
+                for k_type in data['knowledge'].get('types', []):
+                    knowledge_types[k_type] = knowledge_types.get(k_type, 0) + 1
+            
+            # Plot knowledge types
+            ax2.pie(knowledge_types.values(), labels=knowledge_types.keys(), autopct='%1.1f%%')
+            ax2.set_title('Types of Indigenous Knowledge')
+            
+            # Confidence vs Indigenous Knowledge
+            confidences = [d['confidence'] for d in indigenous_data]
+            knowledge_scores = [len(d['knowledge'].get('sources', [])) for d in indigenous_data]
+            ax3.scatter(knowledge_scores, confidences)
+            ax3.set_title('Confidence vs Indigenous Knowledge Support')
+            ax3.set_xlabel('Number of Indigenous Sources')
+            ax3.set_ylabel('Confidence Score')
+            
+            # Timeline of indigenous knowledge
+            if 'timeline' in indigenous_data[0]['knowledge']:
+                timeline = indigenous_data[0]['knowledge']['timeline']
+                ax4.plot(timeline['dates'], timeline['events'], 'o-')
+                ax4.set_title('Indigenous Knowledge Timeline')
+                ax4.tick_params(axis='x', rotation=45)
+            
+            plt.tight_layout()
+            
+            # Save plot
+            output_file = os.path.join(self.output_dir, 'indigenous_knowledge_analysis.png')
+            plt.savefig(output_file)
+            plt.close()
+            
+            return output_file
+        except Exception as e:
+            self.logger.error(f"Error creating indigenous knowledge visualization: {str(e)}")
+            return ""
+
+    def _create_temporal_development_analysis(self, findings: Dict[str, Any]) -> str:
+        """Create analysis of historical development and periods of use."""
+        try:
+            # Extract temporal data
+            temporal_data = []
+            for site in findings['sites']:
+                if 'temporal_indicators' in site:
+                    temporal_data.append({
+                        'site': site,
+                        'age': site['temporal_indicators'].get('estimated_age', 0),
+                        'period': site['temporal_indicators'].get('period', 'Unknown'),
+                        'confidence': site['confidence']
+                    })
+            
+            # Create figure
+            fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 12))
+            
+            # Age distribution by period
+            periods = set(d['period'] for d in temporal_data)
+            period_data = {p: [] for p in periods}
+            
+            for data in temporal_data:
+                period_data[data['period']].append(data['age'])
+            
+            # Box plot of ages by period
+            ax1.boxplot([period_data[p] for p in periods], labels=list(periods))
+            ax1.set_title('Age Distribution by Period')
+            ax1.set_ylabel('Estimated Age (years)')
+            ax1.tick_params(axis='x', rotation=45)
+            
+            # Temporal development map
+            if 'temporal_development' in findings:
+                development = findings['temporal_development']
+                ax2.plot(development['dates'], development['sites'], 'o-')
+                ax2.set_title('Temporal Development of Sites')
+                ax2.set_xlabel('Time Period')
+                ax2.set_ylabel('Number of Sites')
+                ax2.tick_params(axis='x', rotation=45)
+            
+            # Period confidence analysis
+            period_confidences = {p: [] for p in periods}
+            for data in temporal_data:
+                period_confidences[data['period']].append(data['confidence'])
+            
+            # Box plot of confidence by period
+            ax3.boxplot([period_confidences[p] for p in periods], labels=list(periods))
+            ax3.set_title('Confidence Distribution by Period')
+            ax3.set_ylabel('Confidence Score')
+            ax3.tick_params(axis='x', rotation=45)
+            
+            # Period overlap analysis
+            if 'period_overlap' in findings:
+                overlap = findings['period_overlap']
+                im = ax4.imshow(overlap['matrix'], cmap='viridis')
+                ax4.set_xticks(range(len(periods)))
+                ax4.set_yticks(range(len(periods)))
+                ax4.set_xticklabels(list(periods), rotation=45)
+                ax4.set_yticklabels(list(periods))
+                plt.colorbar(im, ax=ax4)
+                ax4.set_title('Period Overlap Analysis')
+            
+            plt.tight_layout()
+            
+            # Save plot
+            output_file = os.path.join(self.output_dir, 'temporal_development_analysis.png')
+            plt.savefig(output_file)
+            plt.close()
+            
+            return output_file
+        except Exception as e:
+            self.logger.error(f"Error creating temporal development analysis: {str(e)}")
+            return ""
+
+    def _create_known_site_comparison(self, findings: Dict[str, Any]) -> str:
+        """Create detailed comparison with known archaeological sites."""
+        try:
+            # Extract comparison data
+            comparison_data = []
+            for site in findings['sites']:
+                if 'known_site_comparison' in site:
+                    comparison_data.append({
+                        'site': site,
+                        'comparison': site['known_site_comparison'],
+                        'confidence': site['confidence']
+                    })
+            
+            # Create figure
+            fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 12))
+            
+            # Feature comparison
+            features = set()
+            for data in comparison_data:
+                features.update(data['comparison'].get('features', {}).keys())
+            
+            feature_similarities = {f: [] for f in features}
+            for data in comparison_data:
+                for feature in features:
+                    similarity = data['comparison'].get('features', {}).get(feature, 0)
+                    feature_similarities[feature].append(similarity)
+            
+            # Box plot of feature similarities
+            ax1.boxplot([feature_similarities[f] for f in features], labels=list(features))
+            ax1.set_title('Feature Similarity with Known Sites')
+            ax1.set_ylabel('Similarity Score')
+            ax1.tick_params(axis='x', rotation=45)
+            
+            # Overall similarity distribution
+            similarities = [data['comparison'].get('overall_similarity', 0) 
+                          for data in comparison_data]
+            ax2.hist(similarities, bins=20)
+            ax2.set_title('Overall Similarity Distribution')
+            ax2.set_xlabel('Similarity Score')
+            ax2.set_ylabel('Number of Sites')
+            
+            # Similarity vs Confidence
+            ax3.scatter(similarities, [d['confidence'] for d in comparison_data])
+            ax3.set_title('Similarity vs Confidence')
+            ax3.set_xlabel('Similarity Score')
+            ax3.set_ylabel('Confidence Score')
+            
+            # Known site types
+            known_types = {}
+            for data in comparison_data:
+                k_type = data['comparison'].get('known_site_type', 'Unknown')
+                known_types[k_type] = known_types.get(k_type, 0) + 1
+            
+            # Plot known site types
+            ax4.pie(known_types.values(), labels=known_types.keys(), autopct='%1.1f%%')
+            ax4.set_title('Distribution of Known Site Types')
+            
+            plt.tight_layout()
+            
+            # Save plot
+            output_file = os.path.join(self.output_dir, 'known_site_comparison.png')
+            plt.savefig(output_file)
+            plt.close()
+            
+            return output_file
+        except Exception as e:
+            self.logger.error(f"Error creating known site comparison: {str(e)}")
+            return "" 

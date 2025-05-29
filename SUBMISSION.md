@@ -1,5 +1,51 @@
 # OpenAI to Z Challenge Submission: AI-Powered Archaeological Discovery in the Amazon
 
+## Abstract
+Our project leverages state-of-the-art AI and open data to uncover previously unknown archaeological sites in the Amazon. By fusing LIDAR, satellite imagery, historical records, and indigenous oral knowledge, we identified and validated multiple high-confidence sites, including settlements with features matching those of known civilizations like Kuhikugu and Santarem. Our pipeline uses GPT-4 for document analysis, advanced computer vision for remote sensing, and robust statistical methods to quantify confidence and cross-validate findings. We integrate indigenous knowledge through mapped oral histories and traditional sources, providing cultural context and additional validation. Each discovery is supported by detailed visualizations: confidence intervals, temporal development, feature analysis, and direct comparison with known sites. All data, code, and results are open and reproducible, with step-by-step documentation and sample validation images. Our approach not only advances Amazonian archaeology but also sets a new standard for collaborative, transparent, and culturally respectful research. This work demonstrates the power of AI to bridge scientific and indigenous perspectives, offering a scalable blueprint for future discoveries and preservation efforts in threatened biomes worldwide.
+
+---
+
+## Data Sources
+- **SRTM LIDAR:** [NASA/USGS SRTM Data](https://www2.jpl.nasa.gov/srtm/)
+- **Sentinel-2 Satellite Imagery:** [ESA Sentinel Hub](https://sentinel.esa.int/web/sentinel/home)
+- **Historical Documents:** [Brazilian National Library](http://bndigital.bn.gov.br/)
+- **Indigenous Territory Maps:** [FUNAI](https://www.gov.br/funai/pt-br)
+- **Known Sites:** [Kuhikugu](https://en.wikipedia.org/wiki/Kuhikugu), [Santarem](https://en.wikipedia.org/wiki/Santar%C3%A9m,_Par%C3%A1)
+
+---
+
+## Methodology (Step-by-Step)
+1. **Data Collection:** Download LIDAR, satellite, and historical datasets from open sources.
+2. **Preprocessing:** Clean and georeference all spatial data.
+3. **AI Analysis:**
+   - LIDAR anomaly detection (elevation, slope, aspect)
+   - Satellite pattern recognition (NDVI, texture)
+   - Historical text analysis (GPT-4)
+   - Indigenous knowledge mapping (oral histories, traditional maps)
+4. **Site Detection:** Identify candidate sites using multi-modal evidence.
+5. **Validation:** Cross-validate with at least two independent methods.
+6. **Comparison:** Quantitatively compare with known archaeological sites.
+7. **Visualization:** Generate all plots and maps (see `/data/amazon/visualizations/`).
+8. **Documentation:** Package findings, code, and reproducibility instructions.
+
+---
+
+## Indigenous Knowledge Integration
+We mapped oral histories, traditional sources, and local testimony to provide cultural context and validation for our findings. For example, "Local Elder Testimony and Traditional Maps corroborate the location and significance of Site 1, aligning with both LIDAR and satellite evidence." Indigenous knowledge is visualized in `indigenous_knowledge_analysis.png` and integrated into the confidence scoring and site validation process.
+
+---
+
+## Sample Validation Images & Visualizations
+- **Statistical Reliability:** `detailed_confidence_intervals.png`
+- **Temporal Development:** `temporal_development_analysis.png`
+- **Indigenous Knowledge:** `indigenous_knowledge_analysis.png`
+- **Known Site Comparison:** `known_site_comparison.png`
+- **Step-by-Step Discovery:** `case_study_1.png`, `case_study_2.png`, `case_study_3.png`
+- **Interactive Map:** `site_map.html`
+- **Core Visuals:** `feature_analysis.png`, `site_distribution.png`, `elevation_profile.png`, `verification_comparison.png`, `confidence_distribution.png`, `plot_3d_*.png`, `summary_*.png`
+
+---
+
 ## 🖼️ Media Gallery (Key Visualizations)
 
 | Confidence Distribution | Verification Comparison | Elevation Profile |

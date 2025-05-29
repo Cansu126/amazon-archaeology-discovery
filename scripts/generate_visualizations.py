@@ -53,6 +53,19 @@ def generate_visualizations():
     print("Generating summary plots...")
     visualization._create_summary_plots(findings)
     
+    # New enhanced visualizations
+    print("Generating detailed confidence intervals...")
+    visualization._create_detailed_confidence_intervals(findings)
+    
+    print("Generating indigenous knowledge analysis...")
+    visualization._create_indigenous_knowledge_visualization(findings)
+    
+    print("Generating temporal development analysis...")
+    visualization._create_temporal_development_analysis(findings)
+    
+    print("Generating known site comparison...")
+    visualization._create_known_site_comparison(findings)
+    
     print("All visualizations generated successfully!")
 
 if __name__ == "__main__":

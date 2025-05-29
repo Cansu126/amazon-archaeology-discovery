@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+"""
+Satellite data processing module for the AI-Powered Archaeological Discovery in the Amazon project.
+This module handles satellite data processing, including NDVI calculation, pattern recognition, and texture analysis.
+"""
+
 import rasterio
 import numpy as np
 import matplotlib.pyplot as plt
@@ -13,6 +19,11 @@ from sklearn.ensemble import IsolationForest
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import DBSCAN
 from typing import Dict, List, Tuple, Any
+from rasterio.transform import from_origin
+from skimage.feature import local_binary_pattern
+from skimage.filters import threshold_otsu
+from skimage.measure import regionprops
+from scipy.ndimage import gaussian_filter
 
 logger = logging.getLogger(__name__)
 
@@ -25,59 +36,134 @@ class SatelliteProcessor:
 
     def process_satellite_data(self, satellite_path: str) -> Dict[str, Any]:
         """Process satellite imagery to detect potential archaeological sites."""
-        self.logger.info(f"Processing satellite image: {satellite_path}")
+        self.logger.info(f"Processing satellite data from {satellite_path}")
         
-        findings = {
-            'sites': [],
-            'metadata': {
-                'source': 'Sentinel-2',
-                'region': 'Amazon',
-                'processing_method': 'Multi-spectral Pattern Recognition'
-            }
-        }
-
         try:
-            # Load satellite imagery
-            with rasterio.open(satellite_path) as src:
-                # Read all bands
-                bands = src.read()
+            # List all .tif files in the satellite_path
+            satellite_files = [f for f in os.listdir(satellite_path) if f.endswith('.tif')]
+            
+            if not satellite_files:
+                self.logger.warning(f"No satellite files found in {satellite_path}")
+                return {'sites': []}
+            
+            # Process each satellite file
+            all_sites = []
+            for satellite_file in satellite_files:
+                file_path = os.path.join(satellite_path, satellite_file)
+                self.logger.info(f"Processing satellite file: {satellite_file}")
                 
-                # Calculate vegetation indices
-                ndvi = self._calculate_ndvi(bands)
-                
-                # Detect geometric patterns
-                patterns = self._detect_geometric_patterns(ndvi)
-                
-                # Analyze texture features
-                texture_features = self._analyze_texture(bands)
-                
-                # Combine evidence
-                for pattern in patterns:
-                    # Verify pattern with texture analysis
-                    if self._verify_pattern(pattern, texture_features):
-                        site = {
-                            'type': 'potential_archaeological_site',
-                            'coordinates': {
-                                'x': float(pattern['x']),
-                                'y': float(pattern['y']),
-                                'elevation': float(pattern.get('elevation', 0))
-                            },
-                            'confidence': pattern['confidence'],
-                            'features': {
-                                'pattern_type': pattern['type'],
-                                'texture_score': pattern['texture_score'],
-                                'vegetation_anomaly': pattern['vegetation_anomaly']
-                            },
-                            'verification_method': 'satellite_pattern_recognition'
-                        }
-                        findings['sites'].append(site)
-
-            self.logger.info(f"Found {len(findings['sites'])} potential sites from satellite analysis")
-            return findings
-
+                with rasterio.open(file_path) as src:
+                    # Read RGB bands
+                    rgb = src.read([1, 2, 3])
+                    
+                    # Calculate NDVI
+                    ndvi = self.calculate_ndvi(rgb)
+                    
+                    # Detect patterns
+                    patterns = self.detect_patterns(ndvi)
+                    
+                    # Analyze texture
+                    texture = self.analyze_texture(rgb)
+                    
+                    # Extract site information
+                    sites = self.extract_sites(patterns, texture, ndvi, src.transform)
+                    all_sites.extend(sites)
+            
+            self.logger.info(f"Found {len(all_sites)} potential sites from satellite data")
+            return {'sites': all_sites}
+        
         except Exception as e:
-            self.logger.error(f"Error processing satellite data: {str(e)}")
-            return findings
+            self.logger.error(f"Error processing satellite data: {str(e)}", exc_info=True)
+            return {'sites': []}
+
+    def calculate_ndvi(self, rgb: np.ndarray) -> np.ndarray:
+        """Calculate Normalized Difference Vegetation Index."""
+        red = rgb[0].astype(float)
+        nir = rgb[2].astype(float)  # Using blue band as approximation for NIR
+        
+        denominator = nir + red
+        denominator[denominator == 0] = 1e-6  # Avoid division by zero
+        ndvi = (nir - red) / denominator
+        
+        return ndvi
+
+    def detect_patterns(self, ndvi: np.ndarray) -> np.ndarray:
+        """Detect patterns in NDVI data that might indicate archaeological features."""
+        # Apply Gaussian filter to reduce noise
+        smoothed = gaussian_filter(ndvi, sigma=1.0)
+        
+        # Calculate local variance
+        local_var = gaussian_filter(smoothed**2, sigma=1.0) - gaussian_filter(smoothed, sigma=1.0)**2
+        
+        # Threshold to detect patterns
+        threshold = threshold_otsu(local_var)
+        patterns = local_var > threshold
+        
+        return patterns
+
+    def analyze_texture(self, rgb: np.ndarray) -> np.ndarray:
+        """Analyze texture features in RGB imagery."""
+        gray = np.mean(rgb, axis=0)
+        
+        radius = 3
+        n_points = 8 * radius
+        lbp = local_binary_pattern(gray, n_points, radius, method='uniform')
+        
+        texture = np.zeros_like(gray)
+        for i in range(n_points + 2):
+            texture[lbp == i] = i / (n_points + 1)
+        
+        return texture
+
+    def extract_sites(self, patterns: np.ndarray, texture: np.ndarray, ndvi: np.ndarray, transform: from_origin) -> List[Dict[str, Any]]:
+        """Extract site information from processed satellite data."""
+        sites = []
+        
+        # Find regions of interest
+        regions = regionprops(patterns.astype(int))
+        
+        for region in regions:
+            # Get region properties
+            y, x = region.centroid
+            area = region.area
+            
+            # Convert pixel coordinates to geographic coordinates
+            lon, lat = rasterio.transform.xy(transform, int(y), int(x))
+            
+            # Calculate confidence based on multiple factors
+            ndvi_mean = np.mean(ndvi[region.coords[:, 0], region.coords[:, 1]])
+            texture_mean = np.mean(texture[region.coords[:, 0], region.coords[:, 1]])
+            
+            confidence = self.calculate_confidence(ndvi_mean, texture_mean, area)
+            
+            site = {
+                'type': 'potential_archaeological_site',
+                'coordinates': {
+                    'x': float(lon),
+                    'y': float(lat)
+                },
+                'confidence': float(confidence),
+                'features': {
+                    'area': float(area),
+                    'ndvi_mean': float(ndvi_mean),
+                    'texture_mean': float(texture_mean)
+                }
+            }
+            sites.append(site)
+        
+        return sites
+
+    def calculate_confidence(self, ndvi_mean: float, texture_mean: float, area: float) -> float:
+        """Calculate confidence score based on multiple factors."""
+        # Normalize factors
+        ndvi_score = (ndvi_mean + 1) / 2  # NDVI ranges from -1 to 1
+        texture_score = texture_mean  # Already normalized
+        area_score = min(area / 1000, 1)  # Normalize area
+        
+        # Weighted combination
+        confidence = (0.4 * ndvi_score + 0.3 * texture_score + 0.3 * area_score)
+        
+        return min(max(confidence, 0), 1)  # Ensure between 0 and 1
 
     def _calculate_ndvi(self, bands: np.ndarray) -> np.ndarray:
         """Calculate Normalized Difference Vegetation Index."""

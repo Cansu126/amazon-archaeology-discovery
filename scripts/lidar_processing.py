@@ -1,10 +1,20 @@
+#!/usr/bin/env python3
+"""
+LIDAR data processing module for the AI-Powered Archaeological Discovery in the Amazon project.
+This module handles LIDAR data processing, including elevation anomaly detection, slope and aspect analysis, and confidence scoring.
+"""
+
 import os
 import logging
 import numpy as np
 import rasterio
+from rasterio.transform import from_origin
+from scipy.ndimage import gaussian_filter
 from rasterio.features import shapes
 from skimage.feature import peak_local_max
 from typing import Dict, Any, List
+
+logger = logging.getLogger(__name__)
 
 class LidarProcessing:
     def __init__(self, config: Dict[str, Any]):
@@ -99,3 +109,165 @@ class LidarProcessing:
             return float(np.arctan2(dy, dx))
         except:
             return 0.0
+
+def process_lidar_data(lidar_path):
+    """
+    Process LIDAR data to detect elevation anomalies, calculate slope and aspect, and score confidence.
+    
+    Args:
+        lidar_path (str): Path to the directory containing LIDAR data files.
+    
+    Returns:
+        dict: A dictionary containing processed LIDAR data, including elevation anomalies, slope, aspect, and confidence scores.
+    """
+    logger.info(f"Processing LIDAR data from {lidar_path}")
+    
+    try:
+        # List all .tif files in the lidar_path
+        lidar_files = [f for f in os.listdir(lidar_path) if f.endswith('.tif')]
+        
+        if not lidar_files:
+            logger.warning(f"No LIDAR files found in {lidar_path}")
+            return {'sites': []}
+        
+        # Process each LIDAR file
+        all_sites = []
+        for lidar_file in lidar_files:
+            file_path = os.path.join(lidar_path, lidar_file)
+            logger.info(f"Processing LIDAR file: {lidar_file}")
+            
+            with rasterio.open(file_path) as src:
+                # Read elevation data
+                elevation = src.read(1)
+                
+                # Detect elevation anomalies
+                anomalies = detect_elevation_anomalies(elevation)
+                
+                # Calculate slope and aspect
+                slope, aspect = calculate_slope_aspect(elevation, src.transform)
+                
+                # Score confidence
+                confidence = score_confidence(anomalies, slope, aspect)
+                
+                # Extract site information
+                sites = extract_sites(anomalies, slope, aspect, confidence, src.transform)
+                all_sites.extend(sites)
+        
+        logger.info(f"Found {len(all_sites)} potential sites from LIDAR data")
+        return {'sites': all_sites}
+    
+    except Exception as e:
+        logger.error(f"Error processing LIDAR data: {str(e)}", exc_info=True)
+        return {'sites': []}
+
+def detect_elevation_anomalies(elevation):
+    """
+    Detect elevation anomalies using Gaussian filtering and thresholding.
+    
+    Args:
+        elevation (numpy.ndarray): 2D array of elevation data.
+    
+    Returns:
+        numpy.ndarray: Binary mask of detected anomalies.
+    """
+    # Apply Gaussian filter to smooth elevation data
+    smoothed = gaussian_filter(elevation, sigma=1.0)
+    
+    # Calculate difference between original and smoothed data
+    diff = elevation - smoothed
+    
+    # Threshold to detect anomalies (e.g., > 2 standard deviations)
+    threshold = 2 * np.std(diff)
+    anomalies = np.abs(diff) > threshold
+    
+    return anomalies
+
+def calculate_slope_aspect(elevation, transform):
+    """
+    Calculate slope and aspect from elevation data.
+    
+    Args:
+        elevation (numpy.ndarray): 2D array of elevation data.
+        transform (rasterio.transform.Affine): Affine transform for the elevation data.
+    
+    Returns:
+        tuple: (slope, aspect) as numpy arrays.
+    """
+    # Calculate gradients
+    dy, dx = np.gradient(elevation)
+    
+    # Calculate slope (in radians)
+    slope = np.arctan(np.sqrt(dx**2 + dy**2))
+    
+    # Calculate aspect (in radians)
+    aspect = np.arctan2(dy, dx)
+    
+    return slope, aspect
+
+def score_confidence(anomalies, slope, aspect):
+    """
+    Score confidence based on anomalies, slope, and aspect.
+    
+    Args:
+        anomalies (numpy.ndarray): Binary mask of detected anomalies.
+        slope (numpy.ndarray): Slope data.
+        aspect (numpy.ndarray): Aspect data.
+    
+    Returns:
+        numpy.ndarray: Confidence scores.
+    """
+    # Example confidence scoring logic
+    # Higher confidence for anomalies with moderate slopes and specific aspects
+    confidence = np.zeros_like(anomalies, dtype=float)
+    
+    # Anomalies with moderate slopes (e.g., 0.1 to 0.3 radians)
+    moderate_slope = (slope > 0.1) & (slope < 0.3)
+    
+    # Anomalies with specific aspects (e.g., facing north or east)
+    specific_aspect = (aspect > -np.pi/4) & (aspect < np.pi/4)
+    
+    # Combine conditions
+    confidence[anomalies & moderate_slope & specific_aspect] = 0.8
+    confidence[anomalies & moderate_slope] = 0.6
+    confidence[anomalies] = 0.4
+    
+    return confidence
+
+def extract_sites(anomalies, slope, aspect, confidence, transform):
+    """
+    Extract site information from processed LIDAR data.
+    
+    Args:
+        anomalies (numpy.ndarray): Binary mask of detected anomalies.
+        slope (numpy.ndarray): Slope data.
+        aspect (numpy.ndarray): Aspect data.
+        confidence (numpy.ndarray): Confidence scores.
+        transform (rasterio.transform.Affine): Affine transform for the data.
+    
+    Returns:
+        list: List of dictionaries containing site information.
+    """
+    sites = []
+    
+    # Find coordinates of anomalies
+    y_indices, x_indices = np.where(anomalies)
+    
+    for y, x in zip(y_indices, x_indices):
+        # Convert pixel coordinates to geographic coordinates
+        lon, lat = rasterio.transform.xy(transform, y, x)
+        
+        site = {
+            'coordinates': {
+                'x': lon,
+                'y': lat,
+                'elevation': anomalies[y, x]
+            },
+            'confidence': float(confidence[y, x]),
+            'features': {
+                'slope': float(slope[y, x]),
+                'aspect': float(aspect[y, x])
+            }
+        }
+        sites.append(site)
+    
+    return sites
