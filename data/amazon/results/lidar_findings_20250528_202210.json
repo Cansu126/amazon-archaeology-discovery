@@ -1,0 +1,70 @@
+{
+    "timestamp": "2025-05-28T20:21:45.154418",
+    "sites": [
+        {
+            "type": "potential_mound",
+            "coordinates": {
+                "longitude": -49.67583333336295,
+                "latitude": -11.916666666650329
+            },
+            "elevation": 194.0,
+            "area": 116.0,
+            "confidence": 0.6092799999999999
+        },
+        {
+            "type": "potential_mound",
+            "coordinates": {
+                "longitude": -49.62500000002963,
+                "latitude": -11.753333333317034
+            },
+            "elevation": 191.0,
+            "area": 154.0,
+            "confidence": 0.61232
+        },
+        {
+            "type": "potential_mound",
+            "coordinates": {
+                "longitude": -49.62000000002963,
+                "latitude": -11.798333333317023
+            },
+            "elevation": 192.0,
+            "area": 120.0,
+            "confidence": 0.6096
+        },
+        {
+            "type": "potential_mound",
+            "coordinates": {
+                "longitude": -49.630000000029625,
+                "latitude": -11.814999999983687
+            },
+            "elevation": 189.0,
+            "area": 441.0,
+            "confidence": 0.63528
+        },
+        {
+            "type": "potential_mound",
+            "coordinates": {
+                "longitude": -50.790000000029366,
+                "latitude": -11.376666666650452
+            },
+            "elevation": 188.0,
+            "area": 235.0,
+            "confidence": 0.6188
+        },
+        {
+            "type": "potential_mound",
+            "coordinates": {
+                "longitude": -50.725833333362715,
+                "latitude": -10.701666666650606
+            },
+            "elevation": 179.0,
+            "area": 298.0,
+            "confidence": 0.62384
+        }
+    ],
+    "statistics": {
+        "total_points": 60480000,
+        "processed_areas": 1,
+        "potential_sites": 6
+    }
+}
