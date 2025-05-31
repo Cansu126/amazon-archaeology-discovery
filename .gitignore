@@ -116,8 +116,8 @@ config.json
 *.pem
 
 # Project specific
-data/amazon/results/*
-data/amazon/visualizations/*
+# data/amazon/results/*
+# data/amazon/visualizations/*
 data/amazon/logs/*
 !data/amazon/results/.gitkeep
 !data/amazon/visualizations/.gitkeep
