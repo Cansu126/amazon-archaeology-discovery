@@ -128,23 +128,37 @@ python scripts/main.py
 
 ## Project Structure
 ```
-amazon-archaeology-discovery/
-├── scripts/
-│   ├── main.py                 # Main execution script
-│   ├── lidar_processing.py     # LIDAR data analysis
-│   ├── satellite_processing.py # Satellite imagery analysis
-│   ├── historical_analysis.py  # Historical document analysis
-│   └── visualization.py        # Visualization generation
-├── data/
+.
+├── main.py                 # Main entry point for the pipeline
+├── requirements.txt        # Project dependencies
+├── config.json            # Configuration file
+├── config.example.json    # Example configuration file
+├── README.md             # Project documentation
+├── SUBMISSION.md         # Challenge submission details
+├── LICENSE               # Project license
+├── data/                 # Data directory
 │   └── amazon/
-│       ├── lidar/             # LIDAR data files
-│       ├── satellite/         # Satellite imagery
-│       ├── historical/        # Historical documents
-│       ├── results/           # Analysis results
-│       └── visualizations/    # Generated visualizations
-├── config.json                # Configuration file
-├── requirements.txt           # Python dependencies
-└── README.md                  # This file
+│       ├── lidar/        # LiDAR data
+│       ├── satellite/    # Satellite imagery
+│       ├── historical/   # Historical documents
+│       ├── results/      # Analysis results
+│       └── visualizations/ # Generated visualizations
+├── scripts/              # Source code
+│   ├── data_processing/  # Data processing modules
+│   │   ├── lidar_processing.py
+│   │   ├── satellite_processing.py
+│   │   └── data_fusion.py
+│   ├── analysis/        # Analysis modules
+│   │   ├── site_detection.py
+│   │   └── historical_analysis.py
+│   ├── utils/          # Utility modules
+│   │   ├── logger.py
+│   │   └── config_loader.py
+│   └── visualization/  # Visualization modules
+│       ├── visualization.py
+│       └── generate_visualizations.py
+├── experimental/        # Jupyter notebooks and experiments
+└── img/               # Documentation images
 ```
 
 ## Methodology

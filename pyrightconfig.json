@@ -1,9 +1,0 @@
-{
-    "include": [
-        "scripts"
-    ],
-    "extraPaths": [
-        ".venv/Lib/site-packages"
-    ],
-    "reportMissingImports": false
-} 

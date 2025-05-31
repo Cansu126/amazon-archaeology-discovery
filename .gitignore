@@ -127,4 +127,19 @@ data/amazon/logs/*
 !data/amazon/lidar/.gitkeep
 !data/amazon/results/.gitkeep
 !data/amazon/visualizations/.gitkeep
-!logs/.gitkeep 
+!logs/.gitkeep
+
+# Logs
+*.log
+logs/
+pipeline.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+data/amazon/visualizations/*
+!data/amazon/visualizations/.gitkeep
+data/amazon/results/*
+!data/amazon/results/.gitkeep 
